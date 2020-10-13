@@ -92,7 +92,17 @@ void insertMiddle(node*&head,int data,int p){
     }
 }
 
-
+bool searchRecursive(node*head, int key){
+    if(head==NULL){
+        return false;
+    }
+    if(head->data ==key){
+        return true;
+    }
+    else{
+        return searchRecursive(head->next,key)
+    }   
+}
 
 int main(){
     node*head = NULL; 
@@ -105,5 +115,10 @@ int main(){
     insertHead(head,8);
     insertTail(head, 100);
     print(head);
+
+    if(searchRecursive(head,8)){
+        cout<<"element is present";
+    }
+    return 0;
 
 }
