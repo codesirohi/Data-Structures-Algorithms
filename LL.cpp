@@ -27,7 +27,7 @@ void insertHead(node*&head,int data){
  //if you do not want your head to be modified in the main
  // (node*head) but if you want changes in main pass it by refrence
  // (node*&head)
-void print(node*head){
+void printlist(node*head){
     //node*temp = head;
     while(head!=NULL){
         cout<<head->data<<"-->";
@@ -91,6 +91,17 @@ void insertMiddle(node*&head,int data,int p){
 
     }
 }
+//value of head will change thats we are pasiing it by reference
+void buildList(node*&head){
+
+    int data;
+    cin>> data;
+
+    while(data!=-1){
+        insertTail(head,data);
+        cin>>data;
+    }
+}
 
 bool searchRecursive(node*head, int key){
     if(head==NULL){
@@ -100,25 +111,62 @@ bool searchRecursive(node*head, int key){
         return true;
     }
     else{
-        return searchRecursive(head->next,key)
+        return searchRecursive(head->next,key);
     }   
+}
+
+//reversing a linkedlist using iteration
+void reverse(node*&head)
+{
+    node*C = head;
+    node*P = NULL;
+    node*N;
+
+    while(C!=NULL){
+        //save the next node 
+        N = C-> next;
+        //making the current node point to prev
+        C->next = P;
+        //just update current and previous node
+        P = C;
+        C = N;
+
+
+
+
+    }
+    head = P;
+}
+
+//operator overloading
+//cascading
+istream& operator>>(istream &is,node*&head){
+    buildList(head);
+    return is;
+}
+
+ostream& operator<<(ostream &os,node*head){
+    printlist (head);
+    return os;
 }
 
 int main(){
     node*head = NULL; 
-
+    //buildList(head);
     
-    insertHead(head,5);
-    insertHead(head,6);
-    insertHead(head,88);
-    insertMiddle(head,3,2);
-    insertHead(head,8);
-    insertTail(head, 100);
-    print(head);
+    //printlist(head);
 
-    if(searchRecursive(head,8)){
-        cout<<"element is present";
-    }
+    cin>>head;
+    cout<<endl<<head<<endl;
+
+    reverse(head);
+
+    cout<<endl<<head<<endl;
+
+
+    //if(searchRecursive(head,3)){
+    //    cout<< "element is present.. "<<endl;
+    //}
     return 0;
 
 }
