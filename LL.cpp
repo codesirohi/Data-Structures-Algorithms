@@ -138,6 +138,37 @@ void reverse(node*&head)
     head = P;
 }
 
+node* rev_rec(node*head){
+
+    //base case for
+    if(head -> next == NULL || head == NULL){
+        return head;
+    }
+    node*smallHead = rev_rec(head->next);
+    node*C =head;
+    C-> next-> next = C;
+    C-> next = NULL;
+    return smallHead;
+
+}
+
+//middle node using runners technique
+node* midPoint(node*head){
+
+    if(head== NULL ||  head ->next == NULL){
+        return head;
+    }
+
+    node*slow = head;
+    node*fast = head->next;
+
+    while(fast != NULL && fast -> next != NULL){
+        fast = fast->next->next;
+        slow = slow -> next;
+    }
+    return slow;
+}
+
 //operator overloading
 //cascading
 istream& operator>>(istream &is,node*&head){
@@ -159,9 +190,11 @@ int main(){
     cin>>head;
     cout<<endl<<head<<endl;
 
-    reverse(head);
-
-    cout<<endl<<head<<endl;
+    //head = rev_rec(head);
+    //printlist(head);
+    node*m = midPoint(head);
+    cout<<m->data;
+    
 
 
     //if(searchRecursive(head,3)){
