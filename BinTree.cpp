@@ -1,4 +1,6 @@
 #include <iostream>
+#include<queue>
+ 
 using namespace std;
 
 class node{
@@ -79,10 +81,92 @@ void print_level(node* root, int k)
 //pick one node at front
 //pop the parent the push its childen in the queue
 
-void print_BFS()
-{
+void print_BFS(node* root)
+{   //putting the node* instead of int because we dont know
+    //baout the chile of root to
+    //the why we passing the address of node
+    queue<node*> q;
+    q.push(root);
+    //int count =0;
+    while(!q.empty())
+    {
+        node* front = q.front();
+        cout<<front->data<<" ";
+        //count++;
+        q.pop();
 
+        if(front->left != NULL)
+        {
+            q.push(front->left);
+        }
+        if (front->right != NULL)
+        {
+            q.push(front->right);
+        }
+        
+
+
+    }
+
+    return;
 }
+
+
+
+//
+//printing bfs method level wise will be
+//mehtod 1
+//using queue<pair<node*,int>> and new line everytime int changes
+//method 2
+//by using NULL char
+
+
+void print_BFS_levelwise(node* root)
+{   //putting the node* instead of int because we dont know
+    //baout the child of root to
+    //that's why we passing the address of node
+    queue<node*> q;
+    q.push(root);
+    q.push(NULL);
+    //we cannot push any other data but we can push null here
+
+
+    while(!q.empty())
+    {
+        node* front = q.front();
+        if(front == NULL)
+        {
+            cout<<endl;
+            q.pop();
+            if(!q.empty())
+            {
+                q.push(NULL);
+            }
+        }
+
+        else
+        {
+
+            cout<<front->data<<" ";
+            q.pop();
+
+            if(front->left != NULL)
+            {
+                q.push(front->left);
+            }
+            
+            if (front->right != NULL)
+            {
+                q.push(front->right);
+            }
+        }
+        
+
+
+    }
+    return;
+}
+
 
 void print_all(node *root)
 {
@@ -92,17 +176,117 @@ void print_all(node *root)
         print_level(root,i);
         cout<<endl;
     }
+
 }
+//addition of all nodes using recursion
+int add(node* root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    return root->data + add(root->left) + add(root->right);
+}
+// no. o all nodes using recursion
+//pre order traversal compexity o(N)
+int count(node* root)
+{
+    if(root==NULL){
+        return 0;
+    }
+
+    return 1 + count(root->left) + count(root->right);
+}
+
+//diameter of a tree 
+int diameter(node* root)
+{
+    if(root==NULL){
+        return 0;
+    }
+    int h1 = height(root->left);
+    int h2 = height(root->right);
+
+    int dia1 = h1+h2;
+    int dia2 = diameter(root->left);
+    int dia3 = diameter(root->right);
+    //computing height is O(N) and we are doing it at every node in
+    //worst case complpexity O(N^2)coz we are finding height at every node.
+    return max(dia1,max(dia2,dia3));
+}
+
+
+
+//diameter int the order of O(N)
+//bottom up traversal
+//post order of 
+
+
+//height balanced tree
+// | h1 -h2 | <= 1 a every node
+
+class HBpair{
+public:
+    int height;
+    bool balance;
+
+};
+
+HBpair isHeightbalancedTree(node* root)
+{   
+    HBpair p;
+
+    if(root ==NULL)
+    {
+
+        p.height = 0;
+        p.balance = true;
+        return p;
+    }
+
+    //bottom up approch using post order traversal O(N)
+
+    //recursive 
+
+    HBpair left = isHeightbalancedTree(root->left);
+    HBpair right = isHeightbalancedTree(root->right);
+
+    p.height = 1 + max(left.height, right.height);
+    if ( abs(left.height - right.height) <= 1 && left.balance && right.balance )
+    {
+        p.balance = true;
+        
+    }
+
+    else{
+
+        p.balance = false;
+    }
+    return p;    
+}
+
 
 
 int main(){ 
     node *root = buildTree();
     //print(root);
-    print_all(root);
+    //print_all(root);
     //print_level(root,4);
+    print_BFS_levelwise(root);
+    int f = count(root);
+    int a = add(root);
+    int d = diameter(root);
+    cout<<"no. of elements:  "<<f<<endl;
+    cout<<"Sum of all the node: "<<a<<endl;  
+    cout<<"diameter of the Btree: "<<d<<endl;
+     
+    if(isHeightbalancedTree(root).balance) cout<<"balanced"<<endl;
 
+    else cout<<"NOT balanced"<<endl;
     
-return 0;
+
+
+    return 0;
 
 }
 // 8 10 1 -1 -1 6 9 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
