@@ -36,7 +36,7 @@ node* buildTree(){
 
 //balanced binary tree always have a height of O(log N)
 
-node* buildHeightBalTree(int *a, int s, int e){
+node* buildHeightBalTree(vector<int> a, int s, int e){
     //Base case
     if(s>e)
     {
@@ -52,13 +52,59 @@ node* buildHeightBalTree(int *a, int s, int e){
     return root;
 }
 
-void print_BFS_levelwise(){
+void print_BFS_levelwise(node* root){
 
     queue<node*> q;
     q.push(root);
     q.push(NULL);
 
     while(!q.empty()){
-        q.push
+        node* front = q.front();
+        if(front == NULL)
+        {
+            cout<<endl;
+            q.pop();
+            if(!q.empty()){
+                q.push(NULL);
+            }
+
+            
+        }
+        else{
+
+            cout<<front->data<<" ";
+            q.pop();
+            if(front->left != NULL){
+                q.push(front->left);
+            }
+
+            if(front->right != NULL){
+                q.push(front->right);
+            }
+
+        }
     }
+}
+
+int main(){
+
+    
+    vector<int> arr;
+    int n;
+    cin>>n;
+
+    for(int i=0; i< n; i++){
+        int temp;
+        cin>>temp;
+        arr.push_back(temp);
+    }
+
+    
+
+    
+    node* root = buildHeightBalTree();
+    print_BFS_levelwise(root);
+
+
+    return 0;
 }
