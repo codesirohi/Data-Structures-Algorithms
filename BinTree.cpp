@@ -291,7 +291,7 @@ node* create_tree_traversal(int *in,int *pre,int s,int e){
     i++;
 
     root->left = create_tree_traversal(in,pre,s,index-1);
-    root->right = create_tree_traversal(in,pre,s,index+1);
+    root->right = create_tree_traversal(in,pre,index+1,e);
 
     return root;
 
@@ -304,7 +304,7 @@ node* create_tree_traversal(int *in,int *pre,int s,int e){
 
 
 int main(){ 
-    node *root = buildTree();
+    //node *root = buildTree();
     //print(root);
     //print_all(root);
     //print_level(root,4);
@@ -323,7 +323,7 @@ int main(){
     int in[] = {3,2,8,4,1,6,7,5};
     int pre[] = {1,2,3,4,8,5,6,7};
 
-    int n = sizeof(in)/sizeof(in[0]);
+    int n = sizeof(in)/sizeof(int);
 
     node *root = create_tree_traversal(in,pre,0,n-1);
     print_BFS_levelwise(root);
