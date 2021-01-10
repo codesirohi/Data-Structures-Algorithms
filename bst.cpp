@@ -106,6 +106,8 @@ void print_BFS_levelwise(node* root)
     //return;
 }
 
+
+//print bst depth first search 
 void inorder(node * root){
     if(root==NULL){
         return;
@@ -114,6 +116,29 @@ void inorder(node * root){
     inorder(root->left);
     cout<<root->data<<", ";
     inorder(root->right);
+
+    //return root;
+}
+
+void preorder(node * root){
+    if(root==NULL){
+        return;
+    }
+    cout<<root->data<<", ";
+    preorder(root->left);
+    preorder(root->right);
+
+    //return root;
+}
+
+void postorder(node * root){
+    if(root==NULL){
+        return;
+    }
+    
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->data<<", ";
 
     //return root;
 }
@@ -217,18 +242,24 @@ int main(){
     node *root = buildBST();
     //inorder of a bst is always sorted "<<endl
     //because first we print the smaller values fromleft tree than right side
-    //inorder(root);
+    
     //cout<<endl;
     print_BFS_levelwise(root);
     cout<<endl;
-    int s;
-    cin>>s;
-    
-    deleteBST(root,s);
-    cout<<"After deletion"<< endl;
-    
-    print_BFS_levelwise(root);
+    inorder(root);
     cout<<endl;
+    preorder(root);
+    cout<<endl;
+    postorder(root);
+
+    //int s;
+    //cin>>s;
+    
+    //deleteBST(root,s);
+    //cout<<"After deletion"<< endl;
+    
+    //print_BFS_levelwise(root);
+    //cout<<endl;
 
     return 0;
 
