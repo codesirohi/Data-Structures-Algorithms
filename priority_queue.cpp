@@ -4,16 +4,27 @@ using namespace std;
 
 
 int main(){
+    //by default priority queue makes 
+    //max heap
+    //priority_queue<int> pq;   <--- this is for max heap size
 
-    priority_queue<int> pq;
+    //for mean heap    // "greater<int>" <--- this is a comparator
+    priority_queue<int,vector<int>,greater<int>> pq1;
+   
 
-    int a[10] = {5,6,17,18,9,11};
-
+    int s; 
+    cin>>s;
+    
     //insert in queue
-    for(int i=0;i<6;i++){
+    while(s--){
 
-        pq.push(a[i]);
+        int temp;
+        cin>>temp;
+        pq.push(temp);
     } 
+
+    
+
 
     while(!pq.empty()){
 
