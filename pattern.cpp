@@ -3,14 +3,12 @@ using namespace std;
 
 int main(){
 
-    for(int i=0; i  < 10; i++){
-       cout<<i<<" ";
-    }
+   vector<int> vec ={12,23,34,45,56,67,78};
 
-    cout<<endl;
-    
-    for(int i=0; i  < 10; ++i){
-       cout<<i<<" ";
+   for(int &it : vec )
+   {
+      it+=1;
+      cout<< it<<" ";
     }
 
 
