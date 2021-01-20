@@ -8,7 +8,7 @@ int main(){
     //max heap
     //priority_queue<int> pq;   <--- this is for max heap size
 
-    //for mean heap    // "greater<int>" <--- this is a comparator
+    //for min heap    // "greater<int>" <--- this is a comparator
     priority_queue<int,vector<int>,greater<int>> pq1;
    
 

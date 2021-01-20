@@ -32,6 +32,8 @@ public:
 
     }
 
+
+
     void bfs(T src){
         //a queue 
         queue<T> q;
@@ -68,6 +70,56 @@ public:
 
 
     }
+//SingleSourceshortPath
+    void SSSP(T src){
+        //a queue 
+        queue<T> q;
+        //a hash map of datatype and int(dist)
+        map<T,int> dist;
+        map<T,T> parent;
+
+        for(auto i : adjList){
+            //all the distances are infininty in the begining 
+            dist[i.first] = INT_MAX;
+        }
+        //pushed the source node in the queue
+        q.push(src); 
+        dist[src] =  0;
+        parent[src] = src; 
+
+        while(!q.empty()){
+
+            T node = q.front();
+            cout<<node<<" ";
+            q.pop();
+
+            
+
+            for(T neighbour : adjList[node]){
+                
+                if(dist[neighbour]==INT_MAX)
+                
+                {
+                    q.push(neighbour);
+                    dist[neighbour] = dist[node] + 1;
+                    parent[neighbour] = node;
+                }
+                
+
+            }
+           
+        }
+         cout<<endl;
+
+        //print the distance to all the nodes
+        for(auto i : adjList){
+
+            T node = i.first;
+            cout<< "Dist of "<<node<<" From "<<src<<" is "<<dist[node]<<endl;
+        }
+
+    }
+
 
     void printAdjList(){
         //iterate over a map
@@ -104,7 +156,7 @@ int main(){
     g.addEdge(3,4);
     
     
-    g.bfs(0);
+    g.SSSP(0);
     cout<<endl;
 
 
