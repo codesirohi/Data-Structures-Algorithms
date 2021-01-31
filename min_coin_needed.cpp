@@ -6,6 +6,23 @@ int minCoin(int n, vectors<int> coins, int amount){
 
     if(amount == 0) return 0;
 
+    int coinsNeeded = INT_MAX;
+
+    for(int i = 0; i<n ; i++){
+
+        if(amount-coins[i] >= 0 )
+        {
+
+            int smallerAns = minCoin(n,coins,amount-coins[i]);
+
+            if(smallerAns != INT_MAX) {
+                ans = min(ans, smallerAns+1);
+            }
+
+        }
+
+    }
+
     
 
 
