@@ -30,6 +30,42 @@ int knapsack(vector<int> wts,vector<int> prices, int N,int W){
 
 //bottom up DP
 //recursions base case is assigment in dp
+//each item have oe copy
+int knapsackDP(vector<int> wts, vector<int> prices,int N,int W){
+
+int dp[100][100];
+
+for(int i=0;i<= N;i++){
+    for(int w=0; w<=W;w++){
+
+        if(i==0 || w==0) dp[i][w] = 0;
+
+        else{
+            int inc = 0, exc = 0;
+            
+            //including price 
+            if(wts[i-1]<=w)
+                inc = prices[i-1] + dp[i-1][w - wts[i-1]];
+                
+                //excluding price
+                exc = dp[i-1][w];
+            
+
+            dp[i][w] = max(inc, exc);
+        }
+
+
+
+    }
+}
+
+return dp[N][W];
+
+}
+
+
+///if each item available infinte number of time
+//unbounded knapsack
 
 int knapsackDP(vector<int> wts, vector<int> prices,int N,int W){
 
@@ -42,13 +78,14 @@ for(int i=0;i<= N;i++){
 
         else{
             int inc = 0, exc = 0;
-            if(wts[i-1]<=w){
-                inc = prices[i-1] + dp[i-1][w - wts[i-1]];
-            }
-
-            else{
+            
+            //including price 
+            if(wts[i-1]<=w)
+                inc = prices[i-1] + dp[i][w - wts[i-1]];
+                
+                //excluding price
                 exc = dp[i-1][w];
-            }
+              
 
             dp[i][w] = max(inc, exc);
         }
@@ -71,7 +108,7 @@ int main(){
     vector<int> wts = {2,7,3,4};
     vector<int> prices = {5,20,20,10};
     int bag_capacity = 11;
-    cout<<knapsack(wts, prices,N,bag_capacity)<<endl;
+    cout<<knapsackDP(wts, prices,N,bag_capacity)<<endl;
 
 
 
