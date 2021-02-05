@@ -38,9 +38,17 @@ void swap(int a,int b){
 //extract ith bit from a numbers
 int getBit(int n,int i)
 {
-    return n & (1<<i);
-}
+    return n & (1<<i) !=0 ?1:0; //!=0 ?1:0 reads as if this not equal to Zero
+                                //return 1 else 0;
+}   
+//change the ith bit of a numbers
+void changeBit(int &n,int i){ //mask is 1 leftshift i
 
+    int mask = i<<i;
+    n = (n|mask);
+
+
+}
 
 int main(){
 
