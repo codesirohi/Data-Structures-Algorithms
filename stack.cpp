@@ -30,7 +30,7 @@ public:
     }
 };
 
-void insert_bottom(stack<int>& s, int x){
+void insert_bottom(Stack<int>& s, int x){
     if(s.empty()){
         s.push(x);
         return;
@@ -41,7 +41,7 @@ void insert_bottom(stack<int>& s, int x){
     s.push(y);
 }
 
-void revStack(stack<int> s){
+void revStack(Stack<int> s){
     if(s.empty()) return;
     int x = s.top();
     s.pop();
