@@ -1,18 +1,23 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
+void helper(int number){
+    if(number>0){
 
-int helper(vector<int> vec; ){
-
-
-    
+        
+        helper(number-1);
+        cout<<number<<" ";
+    }
+    else 
+        return;
 
 }
 
+int main()
+{
 
-int main(){
-
-
+    helper(10);
+    cout<<endl;
 
     return 0;
 }
