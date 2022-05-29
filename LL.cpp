@@ -16,7 +16,7 @@ public:
 // we used & to a pass a pointer varibale by refrence 
 // so we can see changesin the main
 void insertHead(node*&head,int data){
-    node*n = new node(data); 
+    node*n = new node(data);  //n is a pointer of node type s it will only store the value of node type
     //let we have node n [data | next]
     //if we want to update the data we will write (*n).data
     //short cut     n -> data
@@ -33,7 +33,7 @@ void printlist(node*head){
         cout<<head->data<<"-->";
         head =head->next;
     }
-    cout<<endl;
+     cout<<endl;
 
 }
 
@@ -52,7 +52,7 @@ void insertTail(node*&head,int data){
     if(head == NULL){
         head = new node(data);
         return;
-    }
+    }   
     node * tail = head;
     while(tail -> next!=NULL){
 
@@ -124,7 +124,7 @@ void reverse(node*&head)
 
     while(C!=NULL){
         //save the next node 
-        N = C-> next;
+        N = C-> next; 
         //making the current node point to prev
         C->next = P;
         //just update current and previous node
